@@ -130,4 +130,5 @@ dmypy.json
 
 *.xls
 *.xlsx
-*.txt
+
+.idea

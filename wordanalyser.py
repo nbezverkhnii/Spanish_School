@@ -9,11 +9,12 @@
 """
 import os
 import re
-from typing import Optional
 from operator import itemgetter
-import pandas as pd
+from typing import Optional
+
 import matplotlib.pyplot as plt
 import nltk
+import pandas as pd
 from nltk.corpus import stopwords
 
 
