@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 import nltk
 import pandas as pd
 from nltk.corpus import stopwords
+from nltk.stem import SnowballStemmer
 
 
 class WordAnalyser:
@@ -29,6 +30,7 @@ class WordAnalyser:
     RU = re.compile("[1-9]+|[а-яА-Я]+")
     UNDERSCORES = re.compile(r'\b_{1,40}\b', flags=re.MULTILINE)
     SINGLE_CHARS = [chr(i) for i in range(97, 123)] + [chr(0x00F1)]  # Буквы латинского алфавита
+    STEMMER = SnowballStemmer('spanish', ignore_stopwords=True)
 
     def __init__(self, lesson_filename: str) -> None:
         """
@@ -40,8 +42,6 @@ class WordAnalyser:
         self.__filename = self.set_filename(lesson_filename)
         self.__text = self.read_text(self.__filename)
         self.__all_words = self.get_all_words(self.__text)
-
-
 
     @staticmethod
     def set_filename(filename_of_lesson: str) -> Optional[str]:
@@ -95,7 +95,7 @@ class WordAnalyser:
         sw = stopwords.words('spanish') + stopwords.words('russian') + self.SINGLE_CHARS
         set_of_exclusion_words = set(ru_words + underscores_words + sw)
 
-        words = [word.lower() for word in tokens if word not in set_of_exclusion_words]
+        words = [self.STEMMER.stem(word.lower()) for word in tokens if word not in set_of_exclusion_words]
 
         return words
 

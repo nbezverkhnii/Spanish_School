@@ -8,7 +8,7 @@ from courseanalyser import CourseAnalyser
 
 if __name__ == '__main__':
     # Директория с текстовыми файлами уроков в формате .txt
-    files_path = '...'
+    files_path = ''
     # Создаем экземпляр класса CourseAnalyser
     course = CourseAnalyser()
 
